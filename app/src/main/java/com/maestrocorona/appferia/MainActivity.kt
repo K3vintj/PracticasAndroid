@@ -13,6 +13,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import android.content.Intent
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
+
+//import nuevos agregados
+import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.tooling.preview.Preview
+
+//se definen los colores para la AppFeria
+private val Purple40 = Color(0xFF6650a4)
+private val Purple80 = Color(0xFFD0BCFF)
+
+
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +59,7 @@ fun MainScreen(onNavigateToSecondActivity: () -> Unit) {
             BusinessItem("Negocios de la Nave 1")
             BusinessItem("Negocios de la Nave 2")
             BusinessItem("Negocios de la Nave 3")
+            BusinessItem("Atracciones y conciertos") // Aqui se añade la nueva card
             
             // Botón para navegar a la segunda actividad
             Button(
@@ -63,7 +78,10 @@ fun BusinessItem(text: String) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(120.dp)
+            .height(120.dp) ,
+        shape = RoundedCornerShape(12.dp), // Esquinas redondeadas
+        colors = CardDefaults.cardColors(
+            containerColor = Purple40) // Color de fondo de la tarjeta
     ) {
         Row(
             modifier = Modifier
@@ -82,8 +100,17 @@ fun BusinessItem(text: String) {
             // Texto del negocio
             Text(
                 text = text,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(8.dp),
+                //aqui se modifica el tipo de letra y el color
+                fontFamily = FontFamily.SansSerif,
+                fontSize =  18.sp,
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }
+}
+@Preview(showBackground = true)
+@Composable
+fun PreviewMainScreen() {
+    MainScreen(onNavigateToSecondActivity = {})
 }
